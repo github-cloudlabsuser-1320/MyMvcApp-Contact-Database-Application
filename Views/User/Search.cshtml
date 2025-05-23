@@ -1,0 +1,33 @@
+@model List<MyMvcApp.Models.User>
+@{
+    ViewData["Title"] = "Search Users";
+}
+<h2>Search Results</h2>
+<form asp-action="Search" method="get">
+    <input type="text" name="query" value="@ViewData["Query"]" placeholder="Search by name or email..." />
+    <button type="submit">Search</button>
+</form>
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No users found.</p>
+}
